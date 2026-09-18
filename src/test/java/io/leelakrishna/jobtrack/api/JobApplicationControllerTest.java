@@ -12,6 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import io.leelakrishna.jobtrack.domain.ApplicationStatus;
 import io.leelakrishna.jobtrack.domain.JobApplication;
+import io.leelakrishna.jobtrack.config.SecurityConfig;
 import io.leelakrishna.jobtrack.service.ApplicationNotFoundException;
 import io.leelakrishna.jobtrack.service.DuplicateApplicationException;
 import io.leelakrishna.jobtrack.service.JobApplicationService;
@@ -20,10 +21,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(JobApplicationController.class)
+@Import(SecurityConfig.class)
 @TestPropertySource(properties = "spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:9000")
 class JobApplicationControllerTest {
 
