@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: jobtrack-service
+  datasource:
+    url: ${JOBTRACK_DB_URL:jdbc:postgresql://localhost:5432/jobtrack}
+    username: ${JOBTRACK_DB_USER:jobtrack}
+    password: ${JOBTRACK_DB_PASSWORD:}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${JOBTRACK_JWT_ISSUER:http://localhost:9000}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+logging:
+  level:
+    io.leelakrishna.jobtrack: INFO
+
+server:
+  error:
+    include-message: never
